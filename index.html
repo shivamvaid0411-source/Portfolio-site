@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Shivam Vaid</title>
+<title>Shivam Vaid — Portfolio & Arcade</title>
 <link rel="stylesheet" href="style.css"/>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
 
@@ -23,6 +26,15 @@
   </div>
 </nav>
 
+<!-- ALWAYS VISIBLE FLOATING GAME TOGGLE SWITCH -->
+<div id="game-toggle-wrap">
+  <span id="game-toggle-label">Game Mode</span>
+  <label class="switch">
+    <input type="checkbox" id="game-toggle-input">
+    <span class="slider"></span>
+  </label>
+</div>
+
 <!-- HERO -->
 <section id="hero">
   <div class="floating-food" style="left:10%;animation-duration:18s;animation-delay:0s;">🍛</div>
@@ -30,18 +42,46 @@
   <div class="floating-food" style="left:55%;animation-duration:15s;animation-delay:8s;">🫓</div>
   <div class="floating-food" style="left:75%;animation-duration:20s;animation-delay:2s;">🍜</div>
   <div class="floating-food" style="left:88%;animation-duration:17s;animation-delay:6s;">🌶️</div>
-  <div class="hero-eyebrow">Builder · Thinker · Overthinker</div>
-  <h1 class="hero-name">
-    <span class="name-shivam">Shivam</span>
-    <span class="name-vaid">Vaid.</span>
-  </h1>
-  <p class="hero-desc">CS student by day. Builder of things by night. Fuelled by chole bhature, guided by intuition, and always chasing the next idea worth creating.</p>
-  <div class="hero-tags">
-    <span class="tag">B.Tech CS</span>
-    <span class="tag">Voice AI</span>
-    <span class="tag">Content Creator</span>
-    <span class="tag">Emotional Depth</span>
-    <span class="tag">Shivam Speaks</span>
+
+  <div class="hero-wrapper">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Builder · Thinker · Overthinker</div>
+      <h1 class="hero-name">
+        <span class="name-shivam">Shivam</span>
+        <span class="name-vaid">Vaid.</span>
+      </h1>
+      <p class="hero-desc">CS student by day. Builder of things by night. Fuelled by chole bhature, guided by intuition, and always chasing the next idea worth creating.</p>
+      <div class="hero-tags">
+        <span class="tag">B.Tech CS</span>
+        <span class="tag">Voice AI</span>
+        <span class="tag">Content Creator</span>
+        <span class="tag">Emotional Depth</span>
+        <span class="tag">Shivam Speaks</span>
+      </div>
+    </div>
+
+    <!-- RECTANGULAR GAME CARD -->
+    <div id="game-card">
+      <div id="game-hud">
+        <div class="hud-player-name" id="hud-name">PLAYER</div>
+        <div class="hud-scores">
+          <span>SCORE: <strong id="hud-score">0</strong></span>
+          <span class="hud-divider">•</span>
+          <span>BEST: <strong id="hud-best">0</strong></span>
+        </div>
+      </div>
+
+      <div id="game-countdown"></div>
+      <canvas id="gameCanvas" width="600" height="360"></canvas>
+
+      <div id="game-over-overlay">
+        
+        <div class="game-over-title">GAME OVER</div>
+        <div class="game-over-sub" id="game-over-msg">Score: 0 · Best: 0</div>
+        <div class="game-over-prompt">Press <kbd>SPACE</kbd> to restart</div>
+        <button id="quit-btn" class="game-quit-btn">Quit Game</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -273,6 +313,16 @@
   <span>© 2025 Shivam Vaid</span>
   <span>Built with intention.</span>
 </footer>
+
+<div id="name-modal">
+  <div id="name-modal-box">
+    <h3>Enter the arcade</h3>
+    <label for="player-name">Real name:</label>
+    <input type="text" id="player-name" placeholder="Type your name" maxlength="20"/>
+    <p class="modal-note">Your real name will be replaced by a game name once you play.</p>
+    <button id="play-btn">Play</button>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>
