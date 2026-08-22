@@ -369,3 +369,12 @@ if (quitBtn) {
     stopGame();
   });
 }
+
+// MODAL CLOSE BUTTON — dismisses the name prompt without playing
+const modalCloseBtn = document.getElementById('modal-close-btn');
+if (modalCloseBtn) {
+  modalCloseBtn.addEventListener('click', () => {
+    nameModal.classList.remove('active');
+    toggleInput.checked = false; // flip the toggle back off
+  });
+}

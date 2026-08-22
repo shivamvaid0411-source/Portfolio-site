@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LeadFlow AI — How It Works | Shivam Vaid</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#0a0a0a;--fg:#f0ede6;--muted:#888;
+    --c1:#e85d2f;--c2:#f5c842;--c3:#5bceae;--c4:#c084fc;--c5:#fb923c;
+  }
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--fg);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.7;}
+
+  .doc-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 3rem;background:rgba(10,10,10,.9);backdrop-filter:blur(10px);border-bottom:1px solid #1a1a1a;}
+  .doc-nav a{color:var(--muted);text-decoration:none;font-size:.85rem;letter-spacing:.1em;transition:color .2s;}
+  .doc-nav a:hover{color:var(--fg);}
+  .doc-logo{font-size:1.1rem;font-weight:700;letter-spacing:.15em;color:var(--c2);text-decoration:none;}
+
+  .doc-container{max-width:820px;margin:0 auto;padding:10rem 2rem 6rem;}
+
+  .doc-eyebrow{font-size:.8rem;letter-spacing:.3em;color:var(--c3);margin-bottom:1.5rem;text-transform:uppercase;}
+  .doc-title{font-size:clamp(2.2rem,6vw,3.8rem);font-weight:900;line-height:1.05;letter-spacing:-.03em;margin-bottom:1.5rem;}
+  .doc-title span{color:var(--c1);}
+  .doc-subtitle{font-size:1.15rem;color:var(--muted);margin-bottom:3rem;max-width:640px;}
+
+  .doc-tags{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:4rem;}
+  .doc-tag{padding:.35rem .9rem;border:1px solid #2a2a2a;border-radius:99px;font-size:.75rem;letter-spacing:.05em;color:var(--muted);}
+
+  .doc-section{margin-bottom:4rem;}
+  .doc-section h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-.02em;margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem;}
+  .doc-num{font-size:.85rem;color:var(--c1);font-weight:700;}
+  .doc-section p{color:#c9c6bf;font-size:1.02rem;margin-bottom:1.2rem;}
+  .doc-section p strong{color:var(--fg);}
+  .doc-section ul{margin:1rem 0 1.5rem 1.2rem;color:#c9c6bf;}
+  .doc-section li{margin-bottom:.6rem;}
+  .doc-section li strong{color:var(--fg);}
+
+  .agent-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin:2rem 0;}
+  .agent-card{background:#111;border:1px solid #1e1e1e;border-radius:16px;padding:1.5rem;transition:border-color .3s,transform .3s;}
+  .agent-card:hover{border-color:var(--c4);transform:translateY(-4px);}
+  .agent-icon{font-size:1.8rem;margin-bottom:.8rem;display:block;}
+  .agent-name{font-size:1.05rem;font-weight:700;margin-bottom:.5rem;}
+  .agent-desc{font-size:.88rem;color:var(--muted);line-height:1.6;}
+
+  .flow-diagram{background:#111;border:1px solid #1e1e1e;border-radius:20px;padding:2rem;margin:2rem 0;display:flex;flex-wrap:wrap;align-items:center;gap:.8rem;justify-content:center;}
+  .flow-step{background:#0d0d0d;border:1px solid #2a2a2a;border-radius:12px;padding:.8rem 1.2rem;font-size:.85rem;font-weight:700;letter-spacing:.03em;white-space:nowrap;}
+  .flow-arrow{color:var(--c1);font-size:1.2rem;}
+
+  .code-block{background:#0d0d0d;border:1px solid #1e1e1e;border-radius:14px;padding:1.5rem;margin:1.5rem 0;overflow-x:auto;font-family:'Consolas','Monaco',monospace;font-size:.82rem;color:#a8f0c6;line-height:1.7;}
+  .code-block .comment{color:#666;}
+  .code-block .string{color:var(--c2);}
+
+  .callout{background:#151009;border-left:3px solid var(--c1);border-radius:8px;padding:1.2rem 1.5rem;margin:1.5rem 0;font-size:.92rem;color:#d9d4c9;}
+  .callout strong{color:var(--c1);}
+
+  .honesty-box{background:#0d1512;border:1px solid #1e3025;border-radius:16px;padding:1.8rem;margin:2rem 0;}
+  .honesty-box h3{color:var(--c3);font-size:1rem;margin-bottom:.8rem;letter-spacing:.05em;}
+  .honesty-box p{color:#a8b8b0;font-size:.92rem;margin-bottom:0;}
+
+  .screenshot-placeholder{background:#111;border:1px dashed #333;border-radius:16px;padding:3rem 2rem;text-align:center;margin:2rem 0;color:#555;font-size:.85rem;letter-spacing:.05em;}
+
+  .stat-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin:2.5rem 0;}
+  .stat-box{background:#111;border:1px solid #1e1e1e;border-radius:14px;padding:1.3rem;text-align:center;}
+  .stat-box .num{font-size:1.8rem;font-weight:900;color:var(--c1);}
+  .stat-box .label{font-size:.72rem;color:var(--muted);letter-spacing:.05em;margin-top:.3rem;}
+
+  .doc-footer{border-top:1px solid #1a1a1a;padding:3rem 0 1rem;margin-top:3rem;text-align:center;color:var(--muted);font-size:.85rem;}
+  .doc-footer a{color:var(--c2);text-decoration:none;}
+
+  @media (max-width:768px){
+    .doc-nav{padding:1rem;}
+    .doc-container{padding:7rem 1.25rem 4rem;}
+    .flow-diagram{flex-direction:column;align-items:stretch;}
+    .flow-arrow{transform:rotate(90deg);text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="doc-nav">
+  <a href="index.html" class="doc-logo">SV</a>
+  <a href="index.html#projects">← Back to Projects</a>
+</nav>
+
+<div class="doc-container">
+
+  <div class="doc-eyebrow">Project Deep Dive</div>
+  <h1 class="doc-title">How <span>LeadFlow AI</span> actually works</h1>
+  <p class="doc-subtitle">Four agents, one payroll of exactly zero rupees, working the same job a small outbound team would normally handle by hand. This is the full account of what each one does, how they hand work to each other, and where I drew the line between automation and judgment.</p>
+
+  <div class="doc-tags">
+    <span class="doc-tag">Multi-Agent Orchestration</span>
+    <span class="doc-tag">Local Inference (Qwen 2.5)</span>
+    <span class="doc-tag">FastAPI</span>
+    <span class="doc-tag">SQLAlchemy ORM</span>
+    <span class="doc-tag">Web Scraping</span>
+    <span class="doc-tag">Prompt Chaining</span>
+  </div>
+
+  <div class="honesty-box">
+    <h3>⚡ Before you read further, a note on scope</h3>
+    <p>This system lives entirely on my own machine, there is no hosted link to click because there was never a server built to hold one. It is not productized, it does not send anything to anyone without my hand on the keyboard first. What follows is a faithful account of what the code actually does, not a rounded up version of it.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2><span class="doc-num">01</span> Why I built four employees instead of one assistant</h2>
+    <p>Cold outreach has a boring secret, the actual pitch is the easy part. The hard part sits before it, finding a business that genuinely needs what you're offering, figuring out precisely what's broken on their end, writing something that reads like you looked at their business specifically rather than a mail merge with their name dropped in, and if you want to stand out from the hundred other people pitching them that week, showing up with something already built instead of a promise.</p>
+    <p>Doing that properly for even ten businesses by hand eats a full day, and most of that day is repetition, not thinking. So the question I actually sat with wasn't "can AI write a cold email," everyone's already answered that one. The question was whether a chain of narrow, specialized agents could carry the entire research to pitch pipeline on their own, and leave me with only the one decision that actually requires judgment, who's worth reaching out to.</p>
+    <p>I ended up thinking of it less as one clever model and more as four employees on a very small team, each of them running on the same local brain, Qwen 2.5, but each of them given a completely different job description and a completely different prompt. A scout, an analyst, a builder, and a closer. None of them know how to do the others' job, and that's deliberate, a model asked to do four things at once tends to do all four averagely. A model asked to do exactly one thing, with a tightly scoped prompt, tends to do that one thing well.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2><span class="doc-num">02</span> The four employees, and what each one is actually responsible for</h2>
+    <p>Here's the org chart, if you want to call it that. Work flows in one direction, left to right, no employee sees the raw internet except the first one, and no employee touches the outside world except through the database at the very end.</p>
+
+    <div class="flow-diagram">
+      <div class="flow-step">🔍 Lead Finder</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">🧠 Summarizer</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">🛠️ Builder</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">✉️ Outreach Agent</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">💾 Local Database</div>
+    </div>
+
+    <div class="agent-grid">
+      <div class="agent-card">
+        <span class="agent-icon">🔍</span>
+        <div class="agent-name">The Lead Finder</div>
+        <div class="agent-desc">The scout. Queries the Serper search API for real, live businesses in a given niche, throws out anything that's just a social profile masquerading as a website, then actually opens each surviving candidate and reads it, checking for a missing chatbot, a bloated image count, a buried or absent contact page.</div>
+      </div>
+      <div class="agent-card">
+        <span class="agent-icon">🧠</span>
+        <div class="agent-name">The Summarizer</div>
+        <div class="agent-desc">The analyst. Takes the Lead Finder's raw findings, adopts a senior business analyst persona through its prompt, and turns a pile of technical observations into an actual argument, what the company does, why their specific gaps cost them real money, and what the fix should be.</div>
+      </div>
+      <div class="agent-card">
+        <span class="agent-icon">🛠️</span>
+        <div class="agent-name">The Builder</div>
+        <div class="agent-desc">The one who ships proof instead of promises. Reads the analyst's brief and generates a complete, working, single file HTML and Tailwind prototype of the recommended fix, a chatbot widget, a cleaner checkout flow, whatever the diagnosis called for.</div>
+      </div>
+      <div class="agent-card">
+        <span class="agent-icon">✉️</span>
+        <div class="agent-name">The Outreach Agent</div>
+        <div class="agent-desc">The closer. Drafts a short, specific, non spammy cold email built entirely around the pain point that was actually found, references the prototype if one exists, and ends on a clear ask for ten minutes of the reader's time. It writes the email, it never sends it.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-section">
+    <h2><span class="doc-num">03</span> One full run, traced end to end</h2>
+    <p>Here's what actually happens, in order, when I flip the pipeline on, walked through against the real logic sitting in the codebase rather than a simplified summary of it.</p>
+
+    <p><strong>Step one, the search begins.</strong> The Lead Finder is handed a niche, say boutique fashion brands, and constructs a search query using a randomly selected qualifier, top, emerging, boutique, exclusive, so that repeated runs don't just surface the same twenty results every time. That query goes out through Serper, a search API that returns real organic results rather than an LLM's guess at what might exist. Every result that's just a Facebook, Instagram, or LinkedIn profile gets discarded immediately, since there's no actual site there to diagnose or fix.</p>
+
+    <div class="code-block">
+<span class="comment"># From lead_finder.py, filtering out non website results</span>
+if any(x in link for x in ["facebook.com", "instagram.com", <span class="string">"linkedin.com"</span>, "twitter.com", "pinterest.com"]):
+    continue
+    </div>
+
+    <p><strong>Step two, actually reading the page.</strong> Every candidate that survives the filter gets fetched for real, using a proper browser user agent so the request doesn't get silently blocked, and parsed with BeautifulSoup. The agent counts embedded images as a rough proxy for load speed, scans the visible text for any mention of a chat widget or live assistant, and pulls every email address sitting in the raw HTML using a regular expression. None of this is guessed from a page title, it's read directly off the page the way a person scanning quickly would do it.</p>
+
+    <p><strong>Step three, turning observations into an argument.</strong> This is where the Summarizer, and the first real use of local inference, comes in. Qwen 2.5, running fully offline through Ollama, is prompted to think as a senior business analyst and return exactly three things, a read on what the brand's actual value proposition is, an explanation of why the detected technical issues translate into lost revenue rather than a minor inconvenience, and a specific recommendation for the fix. This step is the difference between a generic pitch and one that reads like someone actually looked.</p>
+
+    <div class="callout">
+      <strong>Why this step earns its place in the chain,</strong> a templated cold email gets ignored because the reader can tell, correctly, that it could have been sent to anyone. This step is what makes every single output specific to the one business it was written for, because it genuinely was.
+    </div>
+
+    <p><strong>Step four, building the proof.</strong> When the Builder is switched on in the pipeline's configuration, it reads the analyst's brief and generates a full, working, single file demo, not a static mockup, an actual functioning component styled with Tailwind to look considered rather than templated. A chatbot that responds, a checkout flow that flows. This step is what turns "we think we could help you" into "here's what it would actually look like," delivered before the business has even replied.</p>
+
+    <p><strong>Step five, writing the ask.</strong> The Outreach Agent drafts the email itself, short paragraphs, framed around return on investment rather than features, closing on a specific, low friction ask for a short call. If step four produced a working demo, the draft references it directly, "I've already built this for you," rather than the weaker, more hypothetical "I could build this."</p>
+
+    <p><strong>Step six, everything lands in one place, and stays there.</strong> Every field generated across the run, the brand name, the URL, the emails found on the page, the diagnosed issues, the full analyst brief, the generated demo code, and the drafted email, gets written into a local SQLite database as one row per lead. Nothing leaves the machine automatically at this point. I open the database myself, read through what four employees spent the last few minutes producing, and decide who's actually worth a real email from me.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2><span class="doc-num">04</span> Where the automation stops, on purpose</h2>
+    <p>Multi agent systems get described, often by the people who built them, in ways that make them sound more autonomous than they really are. So here's the honest line, drawn exactly where the code draws it, not where a more impressive sounding version of this page might want to draw it.</p>
+    <ul>
+      <li><strong>Finding and diagnosing leads happens without me,</strong> genuinely autonomous, runs in the background from the moment the pipeline starts.</li>
+      <li><strong>Building working demo code happens without me,</strong> the Builder's output is a complete, functioning file, not a scaffold I finish by hand afterward.</li>
+      <li><strong>Drafting the full email happens without me,</strong> a finished draft, not a template with blanks left for me to fill.</li>
+      <li><strong>Sending happens because of me, not the code,</strong> every draft sits in the local database until I read it, judge it, and decide to send it myself.</li>
+      <li><strong>Deploying the demo happens because of me,</strong> the generated file is stored, and if I want a business to actually see it live, I'm the one who puts it online.</li>
+    </ul>
+    <p>That remaining slice staying manual isn't a gap I'm quietly hoping nobody notices, it's a line I drew on purpose. A system that emails real business owners on my behalf with nobody checking the output first is a genuinely bad idea, regardless of how good the drafts usually are. The entire point of this pipeline was to remove the tedious ninety percent, not the ten percent where judgment is actually the whole job.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2><span class="doc-num">05</span> What's underneath it, and why local mattered</h2>
+    <p><strong>FastAPI</strong> handles the orchestration layer, exposing two endpoints, one that returns every lead currently sitting in the database, and one that kicks the entire four agent pipeline off as a background task so the dashboard never has to sit there frozen waiting on a response. <strong>SQLAlchemy</strong> sits underneath that as the database layer, the Lead table is defined once as a Python class, and every insert, update, and lookup happens through Python objects rather than hand written SQL. A small React dashboard, served as a single static file with no build step involved, gives me a place to toggle which agents are active and watch results land in something closer to real time than a raw database query would.</p>
+    <p>Every call to the model itself, the analysis, the demo generation, the email draft, goes to <strong>Qwen 2.5</strong>, running locally through <strong>Ollama</strong>, never a cloud API. That wasn't purely a cost decision, although it was partly that too. Running local meant I could let the pipeline churn for hours while I iterated on prompts, without once thinking about a rate limit, a bill, or a request quota running out mid test. It also meant there was nowhere to hide, when something didn't work, the fault was mine to find, not an API's black box to wonder about.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2><span class="doc-num">06</span> What actually came out the other side</h2>
+    <p>This pipeline is where the AI chatbot demo builds sitting on my projects page actually came from. I didn't sit down and hand build five separate brand demos one at a time, I pointed the four employees at a niche, let the Lead Finder surface real businesses with a genuinely detectable gap, usually the absence of any chatbot at all, and the Builder returned working prototypes that only needed my review and a deploy command before they were ready to show someone.</p>
+
+    <div class="stat-strip">
+      <div class="stat-box">
+        <div class="num">4</div>
+        <div class="label">Agents in the chain</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">100%</div>
+        <div class="label">Runs on local inference</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">0</div>
+        <div class="label">Emails sent without my review</div>
+      </div>
+    </div>
+
+    <div class="screenshot-placeholder">
+      📸 Dashboard screenshots and a sample generated lead record are coming shortly, updating this section once the next run is complete.
+    </div>
+  </div>
+
+  <div class="doc-section">
+    <h2><span class="doc-num">07</span> What I'd actually build next</h2>
+    <p>If I kept pushing this, the next real improvement wouldn't be automating the send, that line stays exactly where it is. It would be a ranking layer sitting between the database and me, surfacing the strongest five leads out of every fifty based on how severe the diagnosed pain point actually is, so my limited review time goes to the highest signal candidates instead of scrolling a flat table top to bottom. The bottleneck in this system was never generation, the four employees can produce faster than I can read. The bottleneck is my own attention, which is, funnily enough, precisely the problem this entire project was built to solve for someone else in the first place.</p>
+  </div>
+
+  <div class="doc-footer">
+    <p>Built by <strong style="color:var(--fg);">Shivam Vaid</strong>, four agents, one machine, zero cloud bills.</p>
+    <p style="margin-top:.5rem;"><a href="index.html">← Back to portfolio</a></p>
+  </div>
+
+</div>
+
+</body>
+</html>

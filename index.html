@@ -18,7 +18,6 @@
   <div class="logo">SV</div>
   <div class="nav-links">
     <a href="#about">About</a>
-    <a href="#food">Food</a>
     <a href="#projects">Projects</a>
     <a href="#hobbies">Hobbies</a>
     <a href="#youtube">Channel</a>
@@ -37,11 +36,6 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="floating-food" style="left:10%;animation-duration:18s;animation-delay:0s;">🍛</div>
-  <div class="floating-food" style="left:25%;animation-duration:22s;animation-delay:4s;">🥘</div>
-  <div class="floating-food" style="left:55%;animation-duration:15s;animation-delay:8s;">🫓</div>
-  <div class="floating-food" style="left:75%;animation-duration:20s;animation-delay:2s;">🍜</div>
-  <div class="floating-food" style="left:88%;animation-duration:17s;animation-delay:6s;">🌶️</div>
 
   <div class="hero-wrapper">
     <div class="hero-content">
@@ -96,15 +90,16 @@
       <p>I'm <strong>Shivam Vaid</strong> — a first-year CS student with a builder's soul and a restless mind. I'm the kind of person who's thinking three moves ahead while still figuring out what today's move is.</p>
       <p>I code, I write, I guide, I eat really good food. I believe <strong>life should be explored</strong> — whether that's a new city's street food or a new idea at 2am that you just have to build.</p>
       <p>I'm also building <strong>Shivam Speaks</strong> — a YouTube channel about self-improvement, the CS journey, and what it actually feels like to become something.</p>
-    </div>
+      <p>I'm also building <strong>Shivam Speaks</strong> — a YouTube channel about self-improvement, the CS journey, and what it actually feels like to become something.</p>
+      <p>Also, I eat like it's a competitive sport. Chole bhature, Maggi at 1am, rajma chawal on Sundays. If you ever want restaurant recommendations more than you want code reviews, I'm your guy.</p>
+      </div>
     <div class="about-stats">
       <div class="stat-card">
         <div class="stat-num" style="color:var(--c1);">1</div>
         <div class="stat-label">Voice AI project shipped</div>
       </div>
-      <div class="stat-card">
+        <div class="stat-card">
         <div class="stat-num" style="color:var(--c2);">∞</div>
-        <div class="stat-label">Cities left to eat in</div>
       </div>
       <div class="stat-card">
         <div class="stat-num" style="color:var(--c3);">1</div>
@@ -118,87 +113,63 @@
   </div>
 </section>
 
-<!-- FOOD -->
-<section id="food">
-  <div class="sec-header reveal">
-    <span class="sec-num">02</span>
-    <h2 class="sec-title">Things I eat religiously</h2>
-    <div class="sec-line"></div>
-  </div>
-  <div class="food-grid reveal">
-    <div class="food-card" style="border-color:#2a1a0a;" onmouseenter="this.style.borderColor='#e85d2f'" onmouseleave="this.style.borderColor='#2a1a0a'">
-      <span class="food-emoji">🫓</span>
-      <div class="food-name">Chole Bhature</div>
-      <div class="food-desc">The undisputed GOAT. Fluffy bhature, bold spiced chole, a squeeze of lemon. This is not a meal — it's a religion.</div>
-      <span class="food-badge" style="background:#2a1a0a;color:var(--c1);">FAVOURITE</span>
-    </div>
-    <div class="food-card" style="border-color:#1a1a0a;" onmouseenter="this.style.borderColor='#f5c842'" onmouseleave="this.style.borderColor='#1a1a0a'">
-      <span class="food-emoji">🍜</span>
-      <div class="food-name">Maggi at Midnight</div>
-      <div class="food-desc">It hits differently at 1am after a coding session. Add extra masala. Don't follow the instructions on the packet.</div>
-    </div>
-    <div class="food-card" style="border-color:#0a1a1a;" onmouseenter="this.style.borderColor='#5bceae'" onmouseleave="this.style.borderColor='#0a1a1a'">
-      <span class="food-emoji">🥘</span>
-      <div class="food-name">Rajma Chawal</div>
-      <div class="food-desc">Sunday afternoon. Mom's rajma. A pile of rice. Sliced onion on the side. Pure comfort — no explanation needed.</div>
-    </div>
-    <div class="food-card" style="border-color:#1a0a1a;" onmouseenter="this.style.borderColor='#c084fc'" onmouseleave="this.style.borderColor='#1a0a1a'">
-      <span class="food-emoji">🌯</span>
-      <div class="food-name">Kathi Roll</div>
-      <div class="food-desc">The ultimate street food. paneer, chutney — all wrapped tight. Best eaten while walking somewhere you shouldn't be walking.</div>
-    </div>
-    <div class="food-card" style="border-color:#1a150a;" onmouseenter="this.style.borderColor='#fb923c'" onmouseleave="this.style.borderColor='#1a150a'">
-      <span class="food-emoji">🍦</span>
-      <div class="food-name">Kulfi on a stick</div>
-      <div class="food-desc">Malai kulfi from the guy outside the market. Summer's best argument. Always buy two.</div>
-    </div>
-    <div class="food-card" style="border-color:#0a150a;" onmouseenter="this.style.borderColor='#5bceae'" onmouseleave="this.style.borderColor='#0a150a'">
-      <span class="food-emoji">🧆</span>
-      <div class="food-name">Golgappe</div>
-      <div class="food-desc">Standing at a roadside cart, six gogappe deep, eyes watering from the spice. This is peak human experience.</div>
-    </div>
-  </div>
-</section>
 
 <!-- PROJECTS -->
 <section id="projects">
   <div class="sec-header reveal">
-    <span class="sec-num">03</span>
+    <span class="sec-num">02</span>
     <h2 class="sec-title">Things I've built</h2>
     <div class="sec-line"></div>
   </div>
-  <div class="projects-list reveal">
+    <div class="project-card" onclick="window.open('leadflow.html', '_blank')">
+      <div class="project-info">
+        <div class="project-tag">MULTI-AGENT AI</div>
+        <div class="project-name">LeadFlow AI</div>
+        <div class="project-desc">A multi-agent system that scrapes leads, then auto-generates workflow and builds custom demo sites for outreach, the chatbot builds above were built by this, not by hand.</div>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+    <div class="project-card" onclick="window.open('https://cardverse-by-shivam.vercel.app', '_blank')">
+      <div class="project-info">
+        <div class="project-tag">WEB APP</div>
+        <div class="project-name">Card Verse</div>
+        <div class="project-desc">Generate custom ID/trainer cards from your favorite series — Pokémon, superhero licenses, and more. Fully deployed and live.</div>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+    <div class="project-card dual-link">
+      <div class="project-info">
+        <div class="project-tag">AI CHATBOT</div>
+        <div class="project-name">AI Chatbot Builds</div>
+        <div class="project-desc">Custom AI chatbots auto-generated by LeadFlow AI for brand outreach — local/self-hosted LLMs with tailored conversation flows per client.</div>
+      </div>
+      <div class="dual-link-bubbles">
+        <a href="https://demochatbot1.vercel.app/" class="dual-link-bubble" target="_blank" onclick="event.stopPropagation()">Live Demo</a>
+        <div class="dropdown-wrapper">
+          <span class="dual-link-bubble dropdown-trigger">View All Builds</span>
+          <div class="builds-dropdown">
+            <a href="https://demo3-bot.vercel.app/" target="_blank" onclick="event.stopPropagation()">Demo Site 1</a>
+            <a href="https://demo4-bot.vercel.app/" target="_blank" onclick="event.stopPropagation()">Demo Site 2</a>
+            <a href="https://demo-2bot.vercel.app/" target="_blank" onclick="event.stopPropagation()">Demo Site 3</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
     <div class="project-card">
       <div class="project-info">
         <div class="project-tag">VOICE AI · PYTHON</div>
-        <div class="project-name">Voice Assistant</div>
-        <div class="project-desc">Opens and controls apps through voice commands. Built from scratch as a first-year CS student. Functional, useful, and a proof that I actually ship things.</div>
+        <div class="project-name">F.R.I.D.A.Y.</div>
+        <div class="project-desc">A local, Iron-Man-inspired voice assistant running entirely on my own hardware via Ollama. Opens apps, controls tasks, no cloud dependency.</div>
       </div>
       <div class="project-arrow">→</div>
     </div>
-    <div class="project-card">
-      <div class="project-info">
-        <div class="project-tag">CONTENT · YOUTUBE</div>
-        <div class="project-name">Shivam Speaks</div>
-        <div class="project-desc">A channel about self-improvement, the CS journey, and the messy, honest process of becoming. Not polished. Real.</div>
-      </div>
-      <div class="project-arrow">→</div>
-    </div>
-    <div class="project-card">
-      <div class="project-info">
-        <div class="project-tag">COMING SOON</div>
-        <div class="project-name">More things brewing...</div>
-        <div class="project-desc">I'm early. The best projects are still in my head, waking me up at odd hours. Stay close.</div>
-      </div>
-      <div class="project-arrow">→</div>
-    </div>
-  </div>
 </section>
 
 <!-- HOBBIES -->
 <section id="hobbies">
   <div class="sec-header reveal">
-    <span class="sec-num">04</span>
+    <span class="sec-num">03</span>
     <h2 class="sec-title">How I spend my soul</h2>
     <div class="sec-line"></div>
   </div>
@@ -282,14 +253,14 @@
 <!-- YOUTUBE -->
 <section id="youtube">
   <div class="sec-header reveal">
-    <span class="sec-num">05</span>
+    <span class="sec-num">04</span>
     <h2 class="sec-title">The channel</h2>
     <div class="sec-line"></div>
   </div>
   <div class="yt-card reveal">
     <div class="yt-icon">▶</div>
     <div class="yt-name"><span>Shivam</span> Speaks</div>
-    <div class="yt-desc">Self-improvement. The CS journey. The unfiltered truth about becoming something. Not a highlight reel — a real-time document of growth.</div>
+    <div class="yt-desc">Self-improvement. The CS journey. The unfiltered truth about becoming something. Not a highlight reel, a real-time document of growth.</div>
     <a class="yt-btn" href="https://www.youtube.com/@ShivamSpeaks-07" target="_blank">Subscribe →</a>
   </div>
 </section>
@@ -315,6 +286,7 @@
 
 <div id="name-modal">
   <div id="name-modal-box">
+    <button id="modal-close-btn" aria-label="Close">✕</button>
     <h3>Enter the Arcade!</h3>
     <label for="player-name">Name:</label>
     <input type="text" id="player-name" placeholder="Type your to save your score :)" maxlength="20"/>
