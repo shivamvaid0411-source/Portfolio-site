@@ -59,7 +59,39 @@
   .honesty-box h3{color:var(--c3);font-size:1rem;margin-bottom:.8rem;letter-spacing:.05em;}
   .honesty-box p{color:#a8b8b0;font-size:.92rem;margin-bottom:0;}
 
-  .screenshot-placeholder{background:#111;border:1px dashed #333;border-radius:16px;padding:3rem 2rem;text-align:center;margin:2rem 0;color:#555;font-size:.85rem;letter-spacing:.05em;}
+  /* Container block that holds the screenshot */
+  .screenshot-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 2rem auto;
+  /* Remove 'overflow: hidden' if you want the image to physically spill outside the website's text column bounds */
+  }
+
+  /* Targeting the dashboard screenshot image specifically */
+  .screenshot-placeholder img[alt="dashboard screenshot"] {
+  display: block;
+  height: auto;
+  
+  /* Force the image to be 150% wider than its text container */
+  width: 150%; 
+  max-width: 150%; 
+  
+  /* THE FIX: Pulls the image back to the exact horizontal center */
+  margin-left: -25%; 
+  margin-right: -25%;
+  }
+
+/* Mobile Responsive Adjustments (Keeps it clean on phones) */
+  @media (max-width: 768px) {
+  .screenshot-placeholder img[alt="dashboard screenshot"] {
+    width: 100%; 
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  }
 
   .stat-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin:2.5rem 0;}
   .stat-box{background:#111;border:1px solid #1e1e1e;border-radius:14px;padding:1.3rem;text-align:center;}
@@ -215,9 +247,9 @@ if any(x in link for x in ["facebook.com", "instagram.com", <span class="string"
         <div class="label">Emails sent without my review</div>
       </div>
     </div>
+      <p>A visual showcase of LeadFlow AI's Multi-Agent system executing on a local Python FastAPI backend to scrape, identify, and compile 15 high-intent fashion industry leads in real-time.<p>        
 
     <img class="screenshot-placeholder" src="/leadflow/s.png" alt="Dashboard screenshot">
-      📸 Dashboard screenshots and a sample generated lead record are coming shortly, updating this section once the next run is complete.
     </img>
   </div>
 
